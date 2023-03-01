@@ -20,10 +20,12 @@
             </tr>
         </thead>
         <tbody>
+            {% for list in todo_object %}
             <tr>
-                <td>hello</td>
-                <td>hello</td>
+                <td><a href="{% url 'show_todo' list.id %}">{{ list.name }}</a></td>
+                <td>{{ list.created_on }}</td>
             </tr>
+            {% endfor %}
         </tbody>
     </table>
 </body>
