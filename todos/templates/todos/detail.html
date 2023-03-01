@@ -12,6 +12,7 @@
 
             <h1>{{todo_object.name}}</h1>
             <a href="{% url 'edit_post' todo_object.id %}">Edit</a>
+            <a href="{% url 'delete_todo' todo_object.id %}">delete</a>
             <h2>Tasks</h2>
             <table>
                 <thead>
@@ -20,7 +21,7 @@
                             Name
                         </th>
                         <th>
-                            Number of items
+                            Due Date
                         </th>
                     </tr>
                 </thead>
