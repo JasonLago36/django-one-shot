@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="{% url 'todo_list_create' %}">Create</a>
     <h1>My Lists</h1>
     <table>
         <thead>
@@ -23,7 +24,7 @@
             {% for list in todo_object %}
             <tr>
                 <td><a href="{% url 'show_todo' list.id %}">{{ list.name }}</a></td>
-                <td>{{ list.created_on }}</td>
+                <td>{{ forloop.counter }}</td>
             </tr>
             {% endfor %}
         </tbody>
