@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from todos.models import TodoList
+from todos.models import TodoList, TodoItem
 from todos.forms import CreateForm, NewTaskForm
 # Create your views here.
 
@@ -57,7 +57,6 @@ def edit_post(request, id):
         form = CreateForm(request.POST, instance=todo)
         if form.is_valid():
             form.save()
-
             return redirect("todoList_list")
     else:
         form = CreateForm(instance=todo)
@@ -75,3 +74,20 @@ def delete_todo(request, id):
         todo.delete()
         return redirect('todoList_list')
     return render(request, "todos/delete.html")
+
+
+def todo_item_update(request, id):
+    task = TodoItem.objects.get(id=id)
+    if request.method == 'POST':
+        form = NewTaskForm(request.POST, instance=task)
+        if form.is_valid():
+            task = form.save()
+            return redirect('show_todo', id=task.list.id)
+    else:
+        form = NewTaskForm(instance=task)
+    context = {
+        "edit": task,
+        "form": form,
+        }
+
+    return render(request, "todos/update.html", context)
